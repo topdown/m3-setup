@@ -202,46 +202,39 @@ composer require mongodb/mongodb
 composer require predis/predis
 ```
 
-Or if you want the official Redis PHP extension (already installed via pecl):
-
-```bash
-composer require phpredis/phpredis
-```
-
-
 ```php
 <?php
 
-require_once 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
+echo "=== Database Connections ===<br /><br />";
 
-echo "=== Database Connections ===\n\n";
-
-// MySQL
+// MySQL (MySQLi)
 try {
     $mysqli = new mysqli("localhost", "root", "");
-    echo "✓ MySQL Connected\n";
+    echo "✓ MySQL Connected<br />";
     $mysqli->close();
 } catch (Exception $e) {
-    echo "✗ MySQL Error: " . $e->getMessage() . "\n";
+    echo "✗ MySQL Error: " . $e->getMessage() . "<br />";
 }
 
 // MongoDB
 try {
     $client = new MongoDB\Client("mongodb://localhost:27017");
     $client->listDatabases();
-    echo "✓ MongoDB Connected\n";
+    echo "✓ MongoDB Connected<br />";
 } catch (Exception $e) {
-    echo "✗ MongoDB Error: " . $e->getMessage() . "\n";
+    echo "✗ MongoDB Error: " . $e->getMessage() . "<br />";
 }
 
-// Redis
+// Redis (using Predis)
 try {
-    $redis = new Redis();
-    $redis->connect('localhost', 6379);
-    echo "✓ Redis Connected\n";
+    $redis = new Predis\Client('tcp://localhost:6379');
+    $redis->ping();
+    echo "✓ Redis Connected<br />";
 } catch (Exception $e) {
-    echo "✗ Redis Error: " . $e->getMessage() . "\n";
+    echo "✗ Redis Error: " . $e->getMessage() . "<br />";
 }
+
 
 ```
