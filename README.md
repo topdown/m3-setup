@@ -165,8 +165,14 @@ redis-cli ping
 
 ```bash
 
-# MySQL extension (for mysqli/PDO)
-pecl install mysql
+# Both are already built into most PHP installations though. Check:
+# For MySQLi (modern replacement)
+#pecl install mysqli
+# Or for PDO MySQL
+#pecl install pdo_mysql
+# Check installed
+php -m | grep -i mysql
+php -m | grep -i pdo
 
 # Redis extension
 pecl install redis
@@ -176,7 +182,6 @@ pecl install redis
 __Check / Edit INI config__
 
 ```bash
-extension=mysql.so
 extension=redis.so
 ```
 
